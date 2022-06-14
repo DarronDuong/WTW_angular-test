@@ -5,8 +5,9 @@ using WebApplication1.Data;
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/[controller]")]
-    public class PolicyController : Controller
+    [Route("policy")]
+    [ApiController]
+    public class PolicyController : ControllerBase
     {
         private readonly IPolicyRepository _policyRepository;
 
@@ -15,10 +16,30 @@ namespace WebApplication1.Controllers
             _policyRepository = policyRepository;
         }
 
-
-        //TODO add methods to get/create/update/delete data from _repository
+        [HttpGet]
         public IEnumerable<Policy> Get()
         {
+            return _policyRepository.Get();
+        }
+
+        [HttpPost]
+        public IEnumerable<Policy> Add(Policy policy)
+        {
+            _policyRepository.Add(policy);
+            return _policyRepository.Get();
+        }
+
+        [HttpPut]
+        public IEnumerable<Policy> Update([FromBody] Policy policy)
+        {
+            _policyRepository.Update(policy);
+            return _policyRepository.Get();
+        }
+
+        [HttpDelete("{policyNumber}")]
+        public IEnumerable<Policy> Delete(int policyNumber)
+        {
+            _policyRepository.Remove(policyNumber);
             return _policyRepository.Get();
         }
     }

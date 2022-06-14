@@ -1,0 +1,59 @@
+<form [formGroup]="policyForm" autocomplete="off" (ngSubmit)="onSubmit(policyForm)">
+
+  <h1 mat-dialog-title>
+    {{ data?.policyNumber ? 'Edit policy #' + data?.policyNumber : 'Add new policy'}}
+  </h1>
+  <div mat-dialog-content>
+    <div class="wtw-form-field">
+      <mat-label class="wtw-label" for="name">Name</mat-label>
+      <mat-form-field>
+        <input class="wtw-input" id="name" matInput formControlName="Name" type="text" />
+      </mat-form-field>
+      <mat-error class="wtw-error" *ngIf="(policyForm.controls.Name.touched || isSubmitted) && policyForm.controls.Name.invalid">
+        <mat-icon style="margin-right: 12px">warning</mat-icon>
+        <ng-container *ngIf="policyForm.controls.Name.errors?.required">
+          Name is required
+        </ng-container>
+      </mat-error>
+    </div>
+    <div class="wtw-form-field">
+      <mat-label class="wtw-label" for="age">Age</mat-label>
+      <mat-form-field>
+        <input class="wtw-input" id="age" matInput formControlName="Age" type="number" />
+      </mat-form-field>
+      <mat-error class="wtw-error" *ngIf="(policyForm.controls.Age.touched || isSubmitted) && policyForm.controls.Age.invalid">
+        <mat-icon style="margin-right: 12px">warning</mat-icon>
+        <ng-container *ngIf="policyForm.controls.Age.errors?.required">
+          Age is required
+        </ng-container>
+        <ng-container *ngIf="policyForm.controls.Age.errors?.min || policyForm.controls.Age.errors?.max">
+          Age must be in between 1 to 100
+        </ng-container>
+      </mat-error>
+    </div>
+    <div class="wtw-form-field">
+      <mat-label class="wtw-label" for="gender">Gender</mat-label>
+      <mat-form-field appearance="fill">
+        <mat-label>Select gender</mat-label>
+        <mat-select id="gender" formControlName="Gender">
+          <mat-option [value]="0">Male</mat-option>
+          <mat-option [value]="1">Female</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-error class="wtw-error" *ngIf="(policyForm.controls.Gender.touched || isSubmitted) && policyForm.controls.Gender.invalid">
+        <mat-icon style="margin-right: 12px">warning</mat-icon>
+        <ng-container *ngIf="policyForm.controls.Gender.errors?.required">
+          Gender is required
+        </ng-container>
+      </mat-error>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button mat-dialog-close cdkFocusInitial type="button">
+      <mat-icon>close</mat-icon>&nbsp;Cancel
+    </button>
+    <button mat-stroked-button type="submit">
+      <mat-icon>save</mat-icon>&nbsp;Save
+    </button>
+  </div>
+</form>

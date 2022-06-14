@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-subtitle>#{{ item?.policyNumber }}</mat-card-subtitle>
+  <mat-card-title>{{ item?.policyHolder?.name }}</mat-card-title>
+  <mat-card-content>
+    <p>Age: {{ item?.policyHolder?.age }}</p>
+    <p>Gender: {{ item?.policyHolder?.gender === 0 ? 'M' : 'F' }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button (click)="onEdit()">
+      <mat-icon>edit</mat-icon>&nbsp;
+      Edit
+    </button>
+    <button mat-stroked-button (click)="onDelete()">
+      <mat-icon>delete</mat-icon>&nbsp;
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>

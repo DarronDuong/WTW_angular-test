@@ -1,0 +1,9 @@
+<button mat-stroked-button (click)="onAddNew()">
+  <mat-icon>add</mat-icon>&nbsp;
+  Add new policy
+</button>
+<br/><br/>
+<div *ngIf="policies$ | async as policies">
+  <h3>Total policies: {{ policies.length }}</h3>
+  <app-policy-grid-view [data]="policies"></app-policy-grid-view>
+</div>
